@@ -168,28 +168,3 @@ export function generatePageMetadata(config: PageConfig): Metadata {
   return metadata;
 }
 
-/**
- * Helper function to truncate text to a specific length
- * Useful for ensuring meta descriptions stay within limits
- */
-export function truncateText(text: string, maxLength: number): string {
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength - 3) + '...';
-}
-
-/**
- * Helper function to ensure title is within SEO best practices (under 60 chars)
- */
-export function optimizeTitle(title: string, maxLength: number = 60): string {
-  return truncateText(title, maxLength);
-}
-
-/**
- * Helper function to ensure description is within SEO best practices (150-160 chars)
- */
-export function optimizeDescription(description: string, minLength: number = 150, maxLength: number = 160): string {
-  if (description.length < minLength) {
-    console.warn(`Description is shorter than recommended ${minLength} characters: "${description}"`);
-  }
-  return truncateText(description, maxLength);
-}

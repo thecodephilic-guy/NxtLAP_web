@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { allLeagues } from "@/Data/Leagues";
-import { baseURL } from "@/utils/constants";
+import { allLeagues } from "@/data/leagues";
+import { SPORTS_DB_BASE_URL } from "@/lib/api/config";
 import { Event } from "@/types/Event";
 import EventList from "./EventList";
 import { RacingLoader } from "./skeletons/RacingLoader";
-import { F1ApiService } from "@/utils/f1-api";
-import { shouldUseAlternativeAPI } from "@/utils/api-config";
+import { F1ApiService } from "@/lib/api/f1-api";
+import { shouldUseAlternativeAPI } from "@/lib/api/config";
 import { ClipboardClock } from "lucide-react";
 
 export function CombinedEventsFeed() {
@@ -30,9 +30,7 @@ export function CombinedEventsFeed() {
           } else {
             // For others, use TheSportsDB
             try {
-              const res = await fetch(
-                `${baseURL}/eventsseason.php?id=${league.id}&s=${year}`
-              );
+              const res = await fetch(`${SPORTS_DB_BASE_URL}/eventsseason.php?id=${league.id}&s=${year}`);
               const data = await res.json();
               const eventsArray = Array.isArray(data?.events) ? data.events : [];
               return eventsArray.filter((e: Event) => e.strTimestamp > nowISO);
@@ -51,12 +49,12 @@ export function CombinedEventsFeed() {
 
         // Sort by date (ascending)
         allEvents.sort((a, b) => {
-             // F1ApiService returns date/time in specific format, standard API in another.
-             // We need to ensure we are comparing correctly.
-             // strTimestamp is usually "YYYY-MM-DD HH:MM:SS"
-             // F1 adapter ensures compatibility? Let's check type.
-             // Assuming string comparison works for ISO-like dates.
-             return a.strTimestamp.localeCompare(b.strTimestamp);
+          // F1ApiService returns date/time in specific format, standard API in another.
+          // We need to ensure we are comparing correctly.
+          // strTimestamp is usually "YYYY-MM-DD HH:MM:SS"
+          // F1 adapter ensures compatibility? Let's check type.
+          // Assuming string comparison works for ISO-like dates.
+          return a.strTimestamp.localeCompare(b.strTimestamp);
         });
 
         setEvents(allEvents);
@@ -74,8 +72,8 @@ export function CombinedEventsFeed() {
     return (
       <div className="space-y-4">
         <h2 className="text-xl font-bold flex items-center gap-2">
-           <ClipboardClock className="text-primary w-5 h-5" />
-           All Upcoming Races
+          <ClipboardClock className="text-primary w-5 h-5" />
+          All Upcoming Races
         </h2>
         <RacingLoader />
       </div>
@@ -86,8 +84,8 @@ export function CombinedEventsFeed() {
     <div className="space-y-6">
       <div className="space-y-4">
         <h2 className="text-xl font-bold flex items-center gap-2">
-           <ClipboardClock className="text-primary w-5 h-5" />
-           All Upcoming Races
+          <ClipboardClock className="text-primary w-5 h-5" />
+          All Upcoming Races
         </h2>
       </div>
 

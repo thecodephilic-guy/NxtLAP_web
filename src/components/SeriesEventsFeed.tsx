@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { baseURL } from "@/utils/constants";
+import { SPORTS_DB_BASE_URL } from "@/lib/api/config";
 import { Event } from "@/types/Event";
 import EventList from "./EventList";
 import { RacingLoader } from "./skeletons/RacingLoader";
-import { F1ApiService } from "@/utils/f1-api";
-import { shouldUseAlternativeAPI } from "@/utils/api-config";
+import { F1ApiService } from "@/lib/api/f1-api";
+import { shouldUseAlternativeAPI } from "@/lib/api/config";
 import { ClipboardClock } from "lucide-react";
 
 interface SeriesEventsFeedProps {
@@ -34,7 +34,7 @@ export function SeriesEventsFeed({ leagueId }: SeriesEventsFeedProps) {
           // For others, use TheSportsDB
           try {
             const res = await fetch(
-              `${baseURL}/eventsseason.php?id=${leagueId}&s=${year}`
+              `${SPORTS_DB_BASE_URL}/eventsseason.php?id=${leagueId}&s=${year}`
             );
             const data = await res.json();
             const eventsArray = Array.isArray(data?.events) ? data.events : [];
@@ -53,7 +53,7 @@ export function SeriesEventsFeed({ leagueId }: SeriesEventsFeedProps) {
     }
 
     if (leagueId) {
-        fetchEvents();
+      fetchEvents();
     }
   }, [leagueId]);
 
@@ -62,19 +62,19 @@ export function SeriesEventsFeed({ leagueId }: SeriesEventsFeedProps) {
   }
 
   if (events.length === 0) {
-      return (
-        <div className="p-8 text-center border rounded-xl bg-card mt-6">
-          <p className="text-muted-foreground">No upcoming events found for this series.</p>
-        </div>
-      );
+    return (
+      <div className="p-8 text-center border rounded-xl bg-card mt-6">
+        <p className="text-muted-foreground">No upcoming events found for this series.</p>
+      </div>
+    );
   }
 
   return (
     <div className="space-y-6 mt-6">
       <div className="flex items-center justify-between">
-         <h2 className="text-xl font-bold flex items-center gap-2">
-           <ClipboardClock className="text-primary w-5 h-5" />
-           Upcoming Events
+        <h2 className="text-xl font-bold flex items-center gap-2">
+          <ClipboardClock className="text-primary w-5 h-5" />
+          Upcoming Events
         </h2>
       </div>
       <EventList events={events} />

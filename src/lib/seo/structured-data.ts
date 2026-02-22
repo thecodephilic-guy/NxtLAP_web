@@ -228,23 +228,6 @@ export function buildFAQSchema(faqs: Array<{ question: string; answer: string }>
   };
 }
 
-/**
- * Build BreadcrumbList schema for navigation
- */
-export function buildBreadcrumbSchema(
-  items: Array<{ name: string; url?: string }>
-): BreadcrumbSchema {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      ...(item.url && { item: `${siteConfig.url}${item.url}` }),
-    })),
-  };
-}
 
 /**
  * Build WebSite schema with SearchAction
@@ -268,33 +251,6 @@ export function buildWebSiteSchema(): WebSiteSchema {
 }
 
 /**
- * Build SportsEvent schema for motorsport events
- */
-export function buildSportsEventSchema(event: Event): SportsEventSchema {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'SportsEvent',
-    name: event.strEvent,
-    startDate: event.strTimestamp,
-    location: {
-      '@type': 'Place',
-      name: event.strVenue,
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: event.strCity,
-        addressCountry: event.strCountry,
-      },
-    },
-    organizer: {
-      '@type': 'Organization',
-      name: event.strLeague,
-    },
-    sport: 'Motorsport',
-    ...(event.strPoster && { image: event.strPoster }),
-  };
-}
-
-/**
  * Build ItemList schema for blog posts carousel
  */
 export function buildItemListSchema(posts: PostMeta[]): ItemListSchema {
@@ -311,15 +267,4 @@ export function buildItemListSchema(posts: PostMeta[]): ItemListSchema {
         : `${siteConfig.url}${siteConfig.ogImage}`,
     })),
   };
-}
-
-/**
- * Helper function to sanitize text for JSON-LD
- * Removes HTML tags and escapes special characters
- */
-export function sanitizeForSchema(text: string): string {
-  return text
-    .replace(/<[^>]*>/g, '') // Remove HTML tags
-    .replace(/"/g, '\\"') // Escape quotes
-    .trim();
 }

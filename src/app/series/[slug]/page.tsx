@@ -1,4 +1,4 @@
-import { allLeagues } from "@/Data/Leagues";
+import { allLeagues } from "@/data/leagues";
 import { TwoPanelLayout } from "@/components/TwoPanelLayout";
 import { RightPanel } from "@/components/RightPanel";
 import { SeriesEventsFeed } from "@/components/SeriesEventsFeed";
@@ -17,11 +17,11 @@ export function generateStaticParams() {
 }
 
 export default async function SeriesPage({
-    params,
-  }: {
-    params: Promise<{ slug: string }>
-  }) {
-    const slug = (await params).slug;
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const slug = (await params).slug;
 
   // Find the league by matching the URL-friendly slug
   const league = allLeagues.find((l) => {
@@ -38,10 +38,10 @@ export default async function SeriesPage({
     <TwoPanelLayout
       rightPanel={<RightPanel />}
     >
-        <div className="space-y-6">
-            <Hero selectedleague={league} />
-            <SeriesEventsFeed leagueId={league.id} />
-        </div>
+      <div className="space-y-6">
+        <Hero selectedleague={league} />
+        <SeriesEventsFeed leagueId={league.id} />
+      </div>
     </TwoPanelLayout>
   );
 }

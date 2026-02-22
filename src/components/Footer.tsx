@@ -1,7 +1,7 @@
 import MarqueeText from "./MarqueeText";
 import Image from "next/image";
-import navItems from "@/Data/NavItem";
-import socialHandles from "@/Data/SocialHandles";
+import navItems from "@/data/nav-items";
+import socialHandles from "@/data/social-handles";
 import Link from "next/link";
 
 function Footer() {

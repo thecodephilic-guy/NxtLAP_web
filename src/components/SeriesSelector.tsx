@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { allLeagues } from "@/Data/Leagues";
+import { allLeagues } from "@/data/leagues";
 import { cn } from "@/lib/utils";
 
 export function SeriesSelector() {
@@ -14,7 +14,7 @@ export function SeriesSelector() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Show when scrolling up, hide when scrolling down
       // Also show if at the top of the page
       if (currentScrollY < lastScrollY || currentScrollY < 10) {
@@ -22,7 +22,7 @@ export function SeriesSelector() {
       } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
@@ -41,15 +41,15 @@ export function SeriesSelector() {
 
   // For series, we check if pathname starts with /series/{slug}
   const isSeriesActive = (slug: string) => {
-      // Assuming route structure /series/[slug]
-      // We need to map league.shortName or id to the slug used in URL
-      // Let's use shortName as slug for friendly URLs, lowercase
-      const seriesSlug = slug.toLowerCase();
-      return pathname.startsWith(`/series/${seriesSlug}`);
+    // Assuming route structure /series/[slug]
+    // We need to map league.shortName or id to the slug used in URL
+    // Let's use shortName as slug for friendly URLs, lowercase
+    const seriesSlug = slug.toLowerCase();
+    return pathname.startsWith(`/series/${seriesSlug}`);
   };
 
   return (
-    <div 
+    <div
       className={cn(
         "fixed top-16 left-0 right-0 w-full border-b bg-background overflow-x-auto no-scrollbar transition-transform duration-300 z-30",
         isVisible ? "translate-y-0" : "-translate-y-full"
@@ -75,26 +75,26 @@ export function SeriesSelector() {
 
           {/* Individual Leagues */}
           {allLeagues.map((league) => {
-             // Generate a URL-friendly slug (kebab-case)
-             // e.g. "V8 Supercars" -> "v8-supercars"
-             const rawSlug = league.shortName || league.id;
-             const slug = rawSlug.toLowerCase().replace(/\s+/g, '-');
-             const active = isSeriesActive(slug);
+            // Generate a URL-friendly slug (kebab-case)
+            // e.g. "V8 Supercars" -> "v8-supercars"
+            const rawSlug = league.shortName || league.id;
+            const slug = rawSlug.toLowerCase().replace(/\s+/g, '-');
+            const active = isSeriesActive(slug);
 
-             return (
-                <Link
-                  key={league.id}
-                  href={`/series/${slug}`}
-                  className={cn(
-                    "flex flex-shrink-0 items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition-all group",
-                    active
-                      ? "bg-primary text-primary-foreground shadow-sm"
-                      : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
-                  )}
-                >
-                  <span>{league.shortName || league.name}</span>
-                </Link>
-             );
+            return (
+              <Link
+                key={league.id}
+                href={`/series/${slug}`}
+                className={cn(
+                  "flex flex-shrink-0 items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition-all group",
+                  active
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+                )}
+              >
+                <span>{league.shortName || league.name}</span>
+              </Link>
+            );
           })}
         </div>
       </div>

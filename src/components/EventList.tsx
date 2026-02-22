@@ -1,5 +1,5 @@
 import { Event } from "@/types/Event";
-import { allLeagues } from "@/Data/Leagues";
+import { allLeagues } from "@/data/leagues";
 import { Calendar, MapPin, Clock, Flag } from "lucide-react";
 import Image from "next/image";
 
@@ -66,8 +66,8 @@ function EventItem({ event }: EventItemProps) {
       {/* Desktop Layout */}
       <div className="hidden md:block">
         <div className="relative overflow-hidden rounded-xl bg-card border border-border/50 shadow-sm transition-all hover:border-primary/50 hover:shadow-md group">
-            {/* Subtle Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+          {/* Subtle Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
           {/* Content */}
           <div className="relative z-10 p-5 lg:p-6">
@@ -75,22 +75,22 @@ function EventItem({ event }: EventItemProps) {
               {/* Left Column: Details */}
               <div className="lg:col-span-9 space-y-4">
                 <div className="flex items-center gap-3">
-                   {/* League Badge (Small) */}
-                    {leagueLogo ? (
-                        <div className="relative w-8 h-8 rounded bg-white/5 p-1 flex items-center justify-center border border-border/30">
-                            <Image
-                                src={leagueLogo}
-                                alt={strLeague}
-                                width={24}
-                                height={24}
-                                className="object-contain w-full h-full"
-                            />
-                        </div>
-                    ) : (
-                        <div className="p-1.5 bg-primary/10 rounded-lg">
-                            <Flag className="text-primary w-5 h-5" />
-                        </div>
-                    )}
+                  {/* League Badge (Small) */}
+                  {leagueLogo ? (
+                    <div className="relative w-8 h-8 rounded bg-white/5 p-1 flex items-center justify-center border border-border/30">
+                      <Image
+                        src={leagueLogo}
+                        alt={strLeague}
+                        width={24}
+                        height={24}
+                        className="object-contain w-full h-full"
+                      />
+                    </div>
+                  ) : (
+                    <div className="p-1.5 bg-primary/10 rounded-lg">
+                      <Flag className="text-primary w-5 h-5" />
+                    </div>
+                  )}
 
                   <div className="text-sm font-medium text-muted-foreground flex items-center gap-2">
                     <span className="text-foreground font-semibold">{strLeague}</span>
@@ -128,24 +128,24 @@ function EventItem({ event }: EventItemProps) {
                 </div>
               </div>
 
-               {/* Right Column: Date & Status */}
+              {/* Right Column: Date & Status */}
               <div className="lg:col-span-3 flex flex-col items-end justify-center gap-3 border-l border-border/30 pl-6 lg:pl-0 lg:border-l-0">
-                 <div className="text-center w-full bg-secondary/50 rounded-lg p-3 border border-border/50">
-                    <div className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">
-                        {eventDate.toLocaleDateString("en-US", { weekday: "short" })}
-                    </div>
-                    <div className="text-2xl font-bold text-primary">
-                        {eventDate.getDate()}
-                    </div>
-                    <div className="text-xs font-medium text-muted-foreground uppercase">
-                        {eventDate.toLocaleDateString("en-US", { month: "short" })}
-                    </div>
-                 </div>
+                <div className="text-center w-full bg-secondary/50 rounded-lg p-3 border border-border/50">
+                  <div className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">
+                    {eventDate.toLocaleDateString("en-US", { weekday: "short" })}
+                  </div>
+                  <div className="text-2xl font-bold text-primary">
+                    {eventDate.getDate()}
+                  </div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase">
+                    {eventDate.toLocaleDateString("en-US", { month: "short" })}
+                  </div>
+                </div>
 
                 {strPostponed !== "no" && (
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-destructive/10 text-destructive border border-destructive/20">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-destructive/10 text-destructive border border-destructive/20">
                     Postponed
-                    </span>
+                  </span>
                 )}
               </div>
             </div>
@@ -156,50 +156,50 @@ function EventItem({ event }: EventItemProps) {
       {/* Mobile Layout */}
       <div className="block md:hidden">
         <div className="bg-card rounded-xl border border-border/50 shadow-sm overflow-hidden">
-            {/* Header / Banner area could be added here if we had event specific images,
+          {/* Header / Banner area could be added here if we had event specific images,
                 for now we keep it clean. */}
 
           <div className="p-4 space-y-4">
             <div className="flex items-start justify-between gap-4">
-                <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground mb-1">
-                        {leagueLogo ? (
-                             <Image
-                             src={leagueLogo}
-                             alt={strLeague}
-                             width={16}
-                             height={16}
-                             className="object-contain"
-                            />
-                        ) : (
-                            <Flag className="w-3 h-3 text-primary" />
-                        )}
-                        <span>{strLeague}</span>
-                        <span>•</span>
-                        <span>Rd {intRound}</span>
-                    </div>
-                    <h3 className="text-lg font-bold text-foreground leading-tight">{strEvent}</h3>
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground mb-1">
+                  {leagueLogo ? (
+                    <Image
+                      src={leagueLogo}
+                      alt={strLeague}
+                      width={16}
+                      height={16}
+                      className="object-contain"
+                    />
+                  ) : (
+                    <Flag className="w-3 h-3 text-primary" />
+                  )}
+                  <span>{strLeague}</span>
+                  <span>•</span>
+                  <span>Rd {intRound}</span>
                 </div>
-                 {/* Date Box Mobile */}
-                 <div className="flex-shrink-0 text-center bg-secondary/50 rounded p-2 border border-border/50 min-w-[3.5rem]">
-                    <div className="text-[10px] uppercase text-muted-foreground font-semibold">
-                        {eventDate.toLocaleDateString("en-US", { month: "short" })}
-                    </div>
-                    <div className="text-lg font-bold text-primary leading-none">
-                        {eventDate.getDate()}
-                    </div>
-                 </div>
+                <h3 className="text-lg font-bold text-foreground leading-tight">{strEvent}</h3>
+              </div>
+              {/* Date Box Mobile */}
+              <div className="flex-shrink-0 text-center bg-secondary/50 rounded p-2 border border-border/50 min-w-[3.5rem]">
+                <div className="text-[10px] uppercase text-muted-foreground font-semibold">
+                  {eventDate.toLocaleDateString("en-US", { month: "short" })}
+                </div>
+                <div className="text-lg font-bold text-primary leading-none">
+                  {eventDate.getDate()}
+                </div>
+              </div>
             </div>
 
             <div className="space-y-2 pt-2 border-t border-border/30">
-               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                   <Clock className="w-4 h-4 text-primary" />
-                   <span>{formattedTime}</span>
-               </div>
-               <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                   <MapPin className="w-4 h-4 text-primary mt-0.5" />
-                   <span className="line-clamp-1">{strVenue}, {strCity}</span>
-               </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Clock className="w-4 h-4 text-primary" />
+                <span>{formattedTime}</span>
+              </div>
+              <div className="flex items-start gap-2 text-sm text-muted-foreground">
+                <MapPin className="w-4 h-4 text-primary mt-0.5" />
+                <span className="line-clamp-1">{strVenue}, {strCity}</span>
+              </div>
             </div>
 
             {strPostponed !== "no" && (
@@ -244,10 +244,10 @@ export default function EventList({ events }: EventListProps) {
         <div key={monthKey} className="space-y-4">
           {/* Sticky Header */}
           <div className="sticky top-16 z-20 backdrop-blur-md bg-background/80 py-3 border-b border-border/50 -mx-4 px-4 md:mx-0 md:px-0">
-             <h3 className="md:pl-6 pl-1 text-lg font-bold text-primary flex items-center gap-2">
-                <Calendar className="w-5 h-5" />
-                {monthKey}
-             </h3>
+            <h3 className="md:pl-6 pl-1 text-lg font-bold text-primary flex items-center gap-2">
+              <Calendar className="w-5 h-5" />
+              {monthKey}
+            </h3>
           </div>
 
           <div className="space-y-4">

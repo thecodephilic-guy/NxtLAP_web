@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Lora } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
-import Navigation_v2 from "@/components/Navigation_v2";
+import Navbar from "@/components/Navbar";
 import { SeriesSelector } from "@/components/SeriesSelector";
 import Footer from "@/components/Footer";
 
@@ -29,7 +29,7 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nxtlap.com"),
-  alternates:{
+  alternates: {
     canonical: "/",
   },
   title: "NxtLAP | Track Upcoming Motorsports Events",
@@ -105,7 +105,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <div className="flex flex-col min-h-screen">
-          <Navigation_v2 />
+          <Navbar />
           <SeriesSelector />
           <main id="main-content" className="flex-1">
             {children}
